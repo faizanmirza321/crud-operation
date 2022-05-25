@@ -1,16 +1,16 @@
 class Api::UserController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_user, only: [:show, :update, :destroys]
+  before_action :set_user, only: [:show, :update, :destroy]
 
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 3)
-    render json: {status: 200, users: @users}
+    users = User.paginate(page: params[:page], per_page: 3)
+    render json: { status: 200, users: users }
   end
 
   def create
     User.create(user_params)
-    render json: {status: 200, message: "User created sucessfully"}
+    render json: { status: 200, message: "User created sucessfully" } 
   end
 
   def show
